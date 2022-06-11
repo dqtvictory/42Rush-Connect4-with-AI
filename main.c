@@ -15,19 +15,23 @@ static int	print_error_exit()
 // Check program's arguments. If something is wrong, g_error is set and return false
 static bool	check_args(int ac, char** av)
 {
-	(void)ac;(void)av;
-	return true;
+	if (ac != 3)
+	{
+		g_error = "Usage: connect4 <num_rows> <num_cols>";
+		return false;
+	}
+	
+	int	nrows = ft_atoi(av[1]), ncols = ft_atoi(av[2]);
+	if (nrows < MIN_ROW || nrows > MAX_ROW || ncols < MIN_COL || ncols > MAX_COL)
+		g_error = "Number of rows between 6 and 20. Number of columns between 7 and 20";
+	
+	return g_error == NULL;
 }
 
 // Initialize game struct and allocate necessary resources. If fails for any reason,
 // g_error is set and return false
 static bool	init_game(int nrows, int ncols)
 {
-	srand(time(NULL));	// Generate random seed
-	game.nrows = nrows;
-	game.ncols = ncols;
-	game.player = (rand() % 2) ? PLAYER_AI : PLAYER_HUMAN;
-	game.count = 0;
 	game.board = ft_gc_malloc(sizeof(int) * nrows * ncols);
 	if (!game.board)
 	{
@@ -35,6 +39,14 @@ static bool	init_game(int nrows, int ncols)
 		return false;
 	}
 	ft_bzero(game.board, sizeof(int) * nrows * ncols);
+
+	srand(time(NULL));	// Generate random seed
+	game.nrows = nrows;
+	game.ncols = ncols;
+	game.player = (rand() % 2) ? PLAYER_AI : PLAYER_HUMAN;
+	game.count = 0;
+	game.ended = false;
+	game.winner = EMPTY;
 	return true;
 }
 

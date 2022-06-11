@@ -24,7 +24,7 @@ t_pair	alpha_beta(int depth, int alpha, int beta, int move)
 {
 	t_pair	result;
 
-	if (!depth || game_ended())
+	if (!depth || game.ended)
 	{
 		result.best = move;
 		result.value = evaluate();
@@ -63,4 +63,9 @@ t_pair	alpha_beta(int depth, int alpha, int beta, int move)
 		}
 	}
 	return result;
+}
+
+int	ai_play()
+{
+	return alpha_beta(DEFAULT_DEPTH, -99999999, 99999999, -1).best;
 }

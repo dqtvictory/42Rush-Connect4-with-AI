@@ -17,16 +17,23 @@
 #define MAX_ROW	20
 #define MAX_COL	20
 
-#define DEFAULT_DEPTH	4
+#define DEFAULT_DEPTH	6
 
 
 typedef struct
 {
-	int	nrows, ncols;	// board's number of rows and columns
-	int	player;			// current player
-	int	count;			// play count
-	int	*board;			// game state
+	int		nrows, ncols;	// board's number of rows and columns
+	int		player;			// current player
+	int		count;			// play count
+	int		*board;			// game state
+	bool	ended;			// true if game ended
+	int		winner;			// if ended, player who wins
 }	t_game;
+
+typedef struct
+{
+	int dr, dc;
+}	t_direction;
 
 
 // Execute the game loop until game is ended, then return true. If error occurs
@@ -37,13 +44,23 @@ bool	game_loop();
 // false otherwise
 bool	play(int col);
 
-// Return true if game has ended
-bool	game_ended();
+// Return true if the move at (r, c) wins the game
+bool	winner_move(int r, int c);
 
 // Print the game state
 void	print_state();
 
 // AI part
+
+// Return the AI's best move for the current game state
+int	ai_play();
+
+// Return true if backward direction from (r, c) contains the same
+// piece (i.e. already checked before)
+bool	backward_check(int r, int c, int dir_idx);
+
+// Return the number of consecutive pawns by going forward in a direction from (r, c)
+int	forward_check(int r, int c, int dir_idx, t_direction arr[]);
 
 // Return a numerical value for current game state
 int	evaluate();

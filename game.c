@@ -27,6 +27,21 @@ bool	play(int col)
 	return true;
 }
 
+void	undo_play(int col)
+{
+	if (game.board[get_idx(0, col)] == EMPTY)
+		// If first row is empty, nothing to do
+		return;
+	
+	int row = 0;
+	for (; row < game.nrows; ++row)
+		if (game.board[get_idx(row, col)] == EMPTY)
+			break;
+	game.board[get_idx(row - 1, col)] = EMPTY;
+	game.player *= -1;
+	--game.count;
+}
+
 void	print_state()
 {
 	for (int r = game.nrows - 1; r >= 0; --r)

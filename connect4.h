@@ -17,6 +17,8 @@
 #define MAX_ROW	20
 #define MAX_COL	20
 
+#define DEFAULT_DEPTH	4
+
 
 typedef struct
 {
@@ -35,8 +37,19 @@ bool	game_loop();
 // false otherwise
 bool	play(int col);
 
+// Return true if game has ended
+bool	game_ended();
+
 // Print the game state
 void	print_state();
+
+// AI part
+
+// Return a numerical value for current game state
+int	evaluate();
+
+// Undo the last play in column col
+void	undo_play(int col);
 
 // Some useful getters
 

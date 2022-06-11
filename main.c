@@ -15,7 +15,8 @@ static int	print_error_exit()
 // Check program's arguments. If something is wrong, g_error is set and return false
 static bool	check_args(int ac, char** av)
 {
-	
+	(void)ac;(void)av;
+	return true;
 }
 
 // Initialize game struct and allocate necessary resources. If fails for any reason,

@@ -8,6 +8,8 @@
 #define	SYM_AI		'x'
 #define	SYM_EMPTY	' '
 
+# define	clrscr() ft_putstr_fd("\e[1;1H\e[2J", 1)
+
 
 bool	play(int col)
 {
@@ -52,7 +54,8 @@ void	undo_play(int col)
 
 void	print_state()
 {
-	write(1, "\n", 1);
+	clrscr();
+	write(1, "\n	", 2);
 	for (int r = game.nrows - 1; r >= 0; --r)
 	{
 		for (int c = 0; c < game.ncols; ++c)
@@ -62,12 +65,15 @@ void	print_state()
 								(p == PLAYER_AI) ? COLOR_AI : NO_COLOR;
 			char	symbol =	(p == PLAYER_HUMAN) ? SYM_HUMAN :
 								(p == PLAYER_AI) ? SYM_AI : SYM_EMPTY;
-			ft_printf("|%s%c%s", color, symbol, NO_COLOR);
+			ft_printf("| %s%c%s ", color, symbol, NO_COLOR);
 		//ft_printf("|%d", get_idx(r, c));
 		}
-		write(1, "|\n", 2);
+		write(1, "|\n	", 3);
 	}
-	for (int c = 0; c < game.ncols; ++c)
-		ft_printf(" %d", c);
+	int c;
+	for (c = 0; c < game.ncols && c < 10; ++c)
+		ft_printf("  %d ", c);
+	for (; c < game.ncols; ++c)
+		ft_printf("  %2d", c);
 	write(1, "\n", 1);
 }

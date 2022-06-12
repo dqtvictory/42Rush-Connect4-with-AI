@@ -26,13 +26,13 @@ static int	human_play()
 
 	while (move < 0)
 	{
-		ft_putstr_fd("Enter a valid move: ", 1);
+		ft_putstr_fd("\n\n	Enter a valid move: ", 1);
 		buf = get_line();
 		move = ft_atoi(buf);
 		if (!(move >= 0 && move < game.ncols))
 		{
 			move = -1;
-			ft_putstr_fd("\033[96mWrong move\033[0m\n", 1);
+			ft_putstr_fd("\n	\033[96mWrong move\033[0m\n", 1);
 		}
 	}
 		return move;
@@ -48,9 +48,9 @@ bool	game_loop()
 			move = human_play();
 		else
 		{
-			ft_printf("AI thinking...\n");
+			ft_printf("\n	AI thinking...\n");
 			move = ai_play();
-			ft_printf("AI played %d\n\n", move);
+			ft_printf("\n	AI played %d\n\n", move);
 		}
 		if (move >= 0)
 		{
@@ -65,7 +65,7 @@ bool	game_loop()
 	}
 
 	if (game.winner)
-		ft_printf("The winner is %s\n", (game.winner == PLAYER_HUMAN) ? "YOU! Congrats." : "COMPUTER. Haha");
+		ft_printf("\n	\033[1;36mThe winner is %s\033[0m\n\n", (game.winner == PLAYER_HUMAN) ? "YOU! Congrats." : "COMPUTER. Haha");
 
 	return true;
 }

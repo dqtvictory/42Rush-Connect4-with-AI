@@ -24,7 +24,6 @@ bool	play(int col)
 	++game.count;
 
 	// Check if game is ended by this move
-	//	if ((game.count == game.nrows * game.ncols) || winning(get_idx(row, col)))
 	if ((game.count == game.nrows * game.ncols) || winner_move(row, col))
 		game.ended = true;
 

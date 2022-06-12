@@ -40,7 +40,7 @@ static int	human_play()
 
 bool	game_loop()
 {
-	int	move;
+	int	move = -1;
 	print_state();
 	while (!game.ended)
 	{

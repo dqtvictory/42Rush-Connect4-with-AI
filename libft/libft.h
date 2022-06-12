@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <string.h>
+# include "../42gc/ft_gc.h"
 
 typedef unsigned char	t_uchar;
 

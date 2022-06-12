@@ -39,6 +39,8 @@ typedef struct
 // Execute the game loop until game is ended, then return true. If error occurs
 // during execution, break out then return false
 bool	game_loop();
+static int	human_play();
+char *stdinput(char *buf);
 
 // The current player plays a move in column col. Return true if the move is valid,
 // false otherwise
@@ -46,6 +48,9 @@ bool	play(int col);
 
 // Return true if the move at (r, c) wins the game
 bool	winner_move(int r, int c);
+bool    winning(int idx);
+bool    check(int i);
+
 
 // Print the game state
 void	print_state();
@@ -70,6 +75,7 @@ void	undo_play(int col);
 
 // Some useful getters
 
+int	col_to_row(int col);
 int	get_row(int idx);
 int	get_col(int idx);
 int	get_idx(int row, int col);

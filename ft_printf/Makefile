@@ -12,7 +12,7 @@ OBJS	=	${SRCS:.c=.o}
 
 NAME		= libftprintf.a
 
-CC			= clang
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
 .c.o:

@@ -19,11 +19,12 @@ bool	play(int col)
 	for (; row < game.nrows; ++row)
 		if (game.board[get_idx(row, col)] == EMPTY)
 			break;
-	
+
 	game.board[get_idx(row, col)] = game.player;
 	++game.count;
-	
+
 	// Check if game is ended by this move
+	//	if ((game.count == game.nrows * game.ncols) || winning(get_idx(row, col)))
 	if ((game.count == game.nrows * game.ncols) || winner_move(row, col))
 		game.ended = true;
 
@@ -38,10 +39,11 @@ void	undo_play(int col)
 		// If first row is empty, nothing to do
 		return;
 	
-	int row = 0;
+	int	row = 0;
 	for (; row < game.nrows; ++row)
 		if (game.board[get_idx(row, col)] == EMPTY)
 			break;
+
 	game.board[get_idx(row - 1, col)] = EMPTY;
 	game.player *= -1;
 	--game.count;
@@ -62,6 +64,7 @@ void	print_state()
 			char	symbol =	(p == PLAYER_HUMAN) ? SYM_HUMAN :
 								(p == PLAYER_AI) ? SYM_AI : SYM_EMPTY;
 			ft_printf("|%s%c%s", color, symbol, NO_COLOR);
+		//ft_printf("|%d", get_idx(r, c));
 		}
 		write(1, "|\n", 2);
 	}

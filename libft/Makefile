@@ -13,7 +13,7 @@ OBJS		= ${SRCS:.c=.o}
 
 NAME		= libft.a
 
-CC			= clang
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
 .c.o:

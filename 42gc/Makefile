@@ -16,7 +16,7 @@ NAME		=	libftgc.a
 LIB_DIR		=	lib
 LIB_HEADER	=	ft_gc.h
 
-CC			=	@clang
+CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 
 AR			=	@ar -rc

@@ -19,7 +19,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <string.h>
-# include "../42gc/ft_gc.h"
+# include "42gc/ft_gc.h"
+# include "ft_printf/ft_printf.h"
 
 typedef unsigned char	t_uchar;
 

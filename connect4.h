@@ -3,8 +3,6 @@
 
 #include <time.h>
 #include <stdbool.h>
-#include "42gc/ft_gc.h"
-#include "ft_printf/ft_printf.h"
 #include "libft/libft.h"
 
 #define PLAYER_HUMAN	1
@@ -39,8 +37,8 @@ typedef struct
 // Execute the game loop until game is ended, then return true. If error occurs
 // during execution, break out then return false
 bool	game_loop();
-static int	human_play();
-static char	*get_line();
+// int	human_play();
+// char	*get_line();
 
 
 // The current player plays a move in column col. Return true if the move is valid,

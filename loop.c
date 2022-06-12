@@ -3,18 +3,19 @@
 
 static char	*get_line()
 {
-	char buf[2];
-	char *move = "";
-	int	r_byte;
-	int	i = 0;
+	char	buf[2];
+	char	*move = "";
+	long	r_byte;
 
 	while (1)
 	{
 		r_byte = read(0, buf, 1);
-		if (!r_byte || buf[0] == 10)
+		if (!r_byte || buf[0] == '\n')
 			break;
 		buf[1] = 0;
 		move = ft_strjoin(move, buf);
+		if (!move)
+			return NULL;
 	}
 	return (move);
 }
@@ -28,6 +29,11 @@ static int	human_play()
 	{
 		ft_putstr_fd("\n\n	Enter a valid move: ", 1);
 		buf = get_line();
+		if (!buf)
+		{
+			g_error = "Not enough memory for the game";
+			return -1;
+		}
 		move = ft_atoi(buf);
 		if (!(move >= 0 && move < game.ncols))
 		{
@@ -35,7 +41,7 @@ static int	human_play()
 			ft_putstr_fd("\n	\033[96mWrong move\033[0m\n", 1);
 		}
 	}
-		return move;
+	return move;
 }
 
 bool	game_loop()
@@ -52,16 +58,16 @@ bool	game_loop()
 			move = ai_play();
 			ft_printf("\n	AI played %d\n\n", move);
 		}
+
 		if (move >= 0)
 		{
-			int row = col_to_row(move);
 			if (play(move))
-			{
 				print_state();
-				if (winning(get_idx(row, move)))
-					game.ended = true;
-			}
+			else
+				ft_printf("Invalid move. Try again\n");
 		}
+		else
+			return false;
 	}
 
 	if (game.winner)

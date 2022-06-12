@@ -22,6 +22,7 @@ int	ft_atoi(const char *str)
 	int	sign;
 	int	num;
 	int	i;
+	int	c = 0;
 
 	if (!str)
 		return (0);
@@ -39,9 +40,13 @@ int	ft_atoi(const char *str)
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		num = num * 10 + str[i] - '0';
+		c++;
 		i++;
 	}
-	if (str[i] != 10 && str[i])
+	while (str[i] && (str[i] == ' ' || in_range(str[i], 9, 13)))
+		i++;
+	//if (!c || (str[i] && !(str[i] == ' ' || in_range(str[i], 9, 13))))
+	if (!c || str[i] )
 		return (-1);
 	return (num * sign);
 }

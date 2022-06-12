@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -18,7 +19,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len2;
 	char	*join;
 
-	if (!s1 || !s2)
+	if (!s2)
 		return (0);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);

@@ -40,7 +40,8 @@ typedef struct
 // during execution, break out then return false
 bool	game_loop();
 static int	human_play();
-char *stdinput(char *buf);
+static char	*get_line();
+
 
 // The current player plays a move in column col. Return true if the move is valid,
 // false otherwise

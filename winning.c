@@ -12,10 +12,7 @@ bool    check(int i)
     for (int j = 1; j < max; j++)
     {
         if (!(brk % 2) && game.board[i + j] == game.board[i] && j < (game.ncols - get_col(i)))
-        {
-            printf("%d, %d", game.board[i + j] == game.board[i], j < (game.ncols - get_col(i)));
             point_h ++;
-        }
         else if (!(brk % 2)) brk /= 2;
 
         if (!(brk % 3) && game.board[i - j] == game.board[i] && j <= (get_col(i)))

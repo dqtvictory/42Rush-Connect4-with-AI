@@ -1,20 +1,22 @@
 #include "connect4.h"
 
-char *stdinput(char *buf)
-{
-	int	r_byte;
 
-	buf = (char *)malloc(sizeof(char) * 10);
-	if (!buf)
-		return (NULL);
-	ft_bzero((void *)buf, 10);
-	r_byte = read(0, buf, 10);
-	if (r_byte > 9 || ft_isalpha((int)buf[0]))
+static char	*get_line()
+{
+	char buf[2];
+	char *move = "";
+	int	r_byte;
+	int	i = 0;
+
+	while (1)
 	{
-		ft_putstr_fd("\033[96mWrong move\033[0m\n", 1);
-		return (NULL);
+		r_byte = read(0, buf, 1);
+		if (!r_byte || buf[0] == 10)
+			break;
+		buf[1] = 0;
+		move = ft_strjoin(move, buf);
 	}
-	return (buf);
+	return (move);
 }
 
 static int	human_play()
@@ -25,12 +27,9 @@ static int	human_play()
 	while (move < 0)
 	{
 		ft_putstr_fd("Enter a valid move: ", 1);
-		buf = stdinput(buf);
-		if (!buf)
-			continue;
+		buf = get_line();
 		move = ft_atoi(buf);
-		free (buf);
-		if (!(move >= 0 && move <= game.ncols))
+		if (!(move >= 0 && move < game.ncols))
 		{
 			move = -1;
 			ft_putstr_fd("\033[96mWrong move\033[0m\n", 1);
@@ -45,7 +44,6 @@ bool	game_loop()
 	print_state();
 	while (!game.ended)
 	{
-		printf("player : %d\n", game.player);
 		if (game.player == PLAYER_HUMAN)
 			move = human_play();
 		else
